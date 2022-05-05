@@ -37,7 +37,7 @@ steps:
     # commandOptions: '-detailed-exitcode -out=tfplan'
     environmentServiceNameAzureRM: '$(subscription)'
 
-  task: PowerShell@2
+- task: PowerShell@2
   displayName: detect any terraform change
   inputs:
     workingDirectory: '$(System.DefaultWorkingDirectory)'
