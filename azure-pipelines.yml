@@ -17,18 +17,16 @@ steps:
   displayName: install Terraform v0.12.28
   inputs:
     terraformVersion: 'latest'
-- task: TerraformTaskV1@0
-  displayName: terraform init
+
+- task: TerraformTaskV2@2
   inputs:
     provider: 'azurerm'
     command: 'init'
-    workingDirectory: '$(System.DefaultWorkingDirectory)'
     backendServiceArm: '$(subscription)'
     backendAzureRmResourceGroupName: '$(resourceGroup)'
     backendAzureRmStorageAccountName: '$(storageAccount)'
     backendAzureRmContainerName: '$(container)'
     backendAzureRmKey: '$(tfstateFile)'
-
 - task: TerraformTaskV1@0
   displayName: terraform plan -out=tfplan
   inputs:
@@ -39,6 +37,7 @@ steps:
     # commandOptions: '-detailed-exitcode -out=tfplan'
     environmentServiceNameAzureRM: '$(subscription)'
 
+  task: PowerShell@2
   displayName: detect any terraform change
   inputs:
     workingDirectory: '$(System.DefaultWorkingDirectory)'
