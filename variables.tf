@@ -7,7 +7,7 @@ variable "location" {
 }
 
 variable "automation_account" {
-  default = "aa-id-mfacheck-001"
+  default = "aa-id-mfacheck-01"
 }
 
 variable "keyvault" {
