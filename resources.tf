@@ -12,7 +12,7 @@ resource "azurerm_monitor_diagnostic_setting" "aa_monitor_settings" {
     count = var.enable_diagnostic_settings ? 1:0
 
     name                       = var.aa_diagnostic_settings.name
-    target_resource_id         = azurerm_automation_account.automation_account.id
+    target_resource_id         = azurerm_automation_account.aa.id
     log_analytics_workspace_id = var.aa_diagnostic_settings.log_analytics_workspace_id 
     
     log {
