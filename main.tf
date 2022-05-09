@@ -5,10 +5,10 @@ provider "azurerm" {
   features {}
 }
 
-resource "azurerm_resource_group" "rg" {
-  name     = "${var.resource_group}"
-  location = "${var.location}"
-}
+# resource "azurerm_resource_group" "rg" {
+#   name     = "${var.resource_group}"
+#   location = "${var.location}"
+# }
 
 resource "azurerm_automation_account" "aa" {
   name = "${var.automation_account}"
