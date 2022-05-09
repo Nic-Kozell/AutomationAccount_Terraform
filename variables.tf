@@ -8,7 +8,7 @@ variable "location" {
   description = "Location of resource group"
 }
 
-variable "automation_account" {
+variable "automation_account_name" {
   type        = string
   description = "Name of automation account"
 }
