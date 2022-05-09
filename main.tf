@@ -18,9 +18,9 @@ resource "azurerm_automation_account" "aa" {
   identity {
     type = "SystemAssigned"
   }
-  depends_on = [
-     "${var.resource_group}"
-  ]
+#   depends_on = [
+#      "${var.resource_group}"
+#   ]
 }
 
 # resource "azurerm_template_deployment" "source_control_arm" {
