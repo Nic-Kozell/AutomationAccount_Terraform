@@ -1,3 +1,11 @@
+terraform {
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = ">= 2.46.1"
+    }
+  }
+}
 # "${data.azurerm_key_vault_secret.tfstatekey.value}"
 
 
@@ -10,14 +18,7 @@
 #   location = "${var.location}"
 # }
 
-resource "azurerm_automation_account" "aa" {
-  name = "${var.automation_account}"
-  location = "${var.location}"
-  resource_group_name = "${var.resource_group}"
-  sku_name = "Basic"
-  identity {
-    type = "SystemAssigned"
-  }
+
 #   depends_on = [
 #      "${var.resource_group}"
 #   ]
