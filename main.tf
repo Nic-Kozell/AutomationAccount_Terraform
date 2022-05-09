@@ -1,9 +1,9 @@
 # "${data.azurerm_key_vault_secret.tfstatekey.value}"
 
 
-provider "azurerm" {
-  features {}
-}
+# provider "azurerm" {
+#   features {}
+# }
 
 # resource "azurerm_resource_group" "rg" {
 #   name     = "${var.resource_group}"
