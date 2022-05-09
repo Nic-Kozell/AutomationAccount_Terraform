@@ -19,7 +19,7 @@ resource "azurerm_automation_account" "aa" {
     type = "SystemAssigned"
   }
   depends_on = [
-    azurerm_resource_group.rg
+     "${var.resource_group}"
   ]
 }
 
