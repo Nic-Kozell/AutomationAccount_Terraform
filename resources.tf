@@ -53,7 +53,7 @@ resource "azurerm_monitor_diagnostic_setting" "aa_monitor_settings" {
 #   depends_on = [
 #      "${var.resource_group}"
 #   ]
-}
+# }
 
 # resource "azurerm_template_deployment" "source_control_arm" {
 #   name = "automationSourceControl"
