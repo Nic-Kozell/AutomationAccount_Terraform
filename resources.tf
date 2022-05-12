@@ -10,7 +10,7 @@ resource "azurerm_automation_account" "aa" {
 
 resource "azurerm_role_assignment" "aaPermisions" {
   scope                = azurerm_automation_account.aa.id
-  role_definition_name = "Contributor"
+  role_definition_name = "Reader"
   principal_id         = "${azurerm_automation_account.aa.identity[0].principal_id}"
 }
 
