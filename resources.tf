@@ -8,6 +8,12 @@ resource "azurerm_automation_account" "aa" {
   }
 }
 
+resource "azurerm_role_assignment" "aaPermisions" {
+  scope                = azurerm_automation_account.aa.id
+  role_definition_name = "Contributor"
+  principal_id         = "${azurerm_automation_account.aa.identity[0].principal_id}"
+}
+
 resource "azurerm_monitor_diagnostic_setting" "aa_monitor_settings" {
     count = var.enable_diagnostic_settings ? 1:0
 
