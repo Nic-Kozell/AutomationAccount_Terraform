@@ -25,7 +25,7 @@ resource "azurerm_storage_account" "storage" {
   account_replication_type = "LRS"
   account_tier = "Standard"
   location = "${var.location}"
-  name = "sa${var.project_name}-${random_string.random_suffix.result}"
+  name = "sa${var.project_name}${random_string.random_suffix.result}"
 }
 
 resource "azurerm_storage_container" "tfstate" {
