@@ -24,7 +24,7 @@ resource "azurerm_storage_account" "storage" {
   resource_group_name = azurerm_resource_group.auto.name
   account_replication_type = "LRS"
   account_tier = "Standard"
-  location = azurerm_resource_group.auto.location
+  location = azurerm_resource_group.aa.location
   name = "sa${var.project_name}-${random_string.random_suffix.result}"
 }
 
