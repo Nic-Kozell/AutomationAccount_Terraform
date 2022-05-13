@@ -1,5 +1,11 @@
+resource "random_string" "random_suffix" {
+  length = 3
+  special = false
+  upper = false
+}
+
 resource "azurerm_automation_account" "aa" {
-  name = "${var.automation_account_name}"
+  name = "aa-${var.project_name}-${random_string.random_suffix.result}"
   location = "${var.location}"
   resource_group_name = "${var.resource_group_name}"
   sku_name = "Basic"
@@ -12,6 +18,26 @@ resource "azurerm_role_assignment" "aaPermisions" {
   scope                = azurerm_automation_account.aa.id
   role_definition_name = "Contributor"
   principal_id         = "${azurerm_automation_account.aa.identity[0].principal_id}"
+}
+
+resource "azurerm_storage_account" "storage" {
+  resource_group_name = azurerm_resource_group.auto.name
+  account_replication_type = "LRS"
+  account_tier = "Standard"
+  location = azurerm_resource_group.auto.location
+  name = "sa${var.project_name}-${random_string.random_suffix.result}"
+}
+
+resource "azurerm_storage_container" "tfstate" {
+  name                  = "sc${var.project_name}-${random_string.random_suffix.result}"
+  storage_account_name  = azurerm_storage_account.storage.name
+  container_access_type = "blob"
+}
+
+resource "azurerm_role_assignment" "storagePermission" {
+  scope                = azurerm_storage_account.storage.id
+  role_definition_name = "Contributor"
+  principal_id         = module.automation-account.automation_account_identity.value
 }
 
 resource "azurerm_monitor_diagnostic_setting" "aa_monitor_settings" {
