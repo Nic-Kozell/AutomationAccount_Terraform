@@ -37,7 +37,7 @@ resource "azurerm_storage_container" "tfstate" {
 resource "azurerm_role_assignment" "storagePermission" {
   scope                = azurerm_storage_account.storage.id
   role_definition_name = "Contributor"
-  principal_id         = module.automation-account.automation_account_identity.value
+  principal_id         = "${azurerm_automation_account.aa.identity[0].principal_id}"
 }
 
 resource "azurerm_monitor_diagnostic_setting" "aa_monitor_settings" {
