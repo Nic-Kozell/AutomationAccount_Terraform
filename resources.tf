@@ -21,10 +21,10 @@ resource "azurerm_role_assignment" "aaPermisions" {
 }
 
 resource "azurerm_storage_account" "storage" {
-  resource_group_name = azurerm_resource_group.auto.name
+  resource_group_name = "${var.resource_group_name}"
   account_replication_type = "LRS"
   account_tier = "Standard"
-  location = azurerm_resource_group.aa.location
+  location = "${var.location}"
   name = "sa${var.project_name}-${random_string.random_suffix.result}"
 }
 
