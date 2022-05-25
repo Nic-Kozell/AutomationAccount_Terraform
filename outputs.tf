@@ -7,6 +7,6 @@
 #     description = "Automation account identity principal"
 #     value = ${azurerm_automation_account.aa.identity[0].principal_id}
 # }
-output "automation_account_name" {  
-    value = azurerm_automation_account.aa.name
-}
+# output "automation_account_name" {  
+#     value = azurerm_automation_account.aa.name
+# }
