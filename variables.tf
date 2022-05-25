@@ -12,10 +12,6 @@ variable "project_name" {
   type        = string
 }
 
-# variable "automation_account_name" {
-#   type        = string
-#   description = "Name of automation account"
-# }
 
 variable "sku_name" {
   type        = string
@@ -38,9 +34,4 @@ variable "aa_diagnostic_settings" {
     default     = null
 }
 
-variable "tenant_id" {
-  type        = string
-  description = "Tenant where resources will be deployed"
-  default = "aa3f6932-fa7c-47b4-a0ce-a598cad161cf"
-}
 
