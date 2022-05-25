@@ -1,14 +1,9 @@
-resource "random_string" "random_suffix" {
-  length = 3
-  special = false
-  upper = false
-}
 
 resource "azurerm_automation_account" "aa" {
-  name = "aa-${var.project_name}-${random_string.random_suffix.result}"
-  location = "${var.location}"
-  resource_group_name = "${var.resource_group_name}"
-  sku_name = "Basic"
+  name = var.automation_account_name
+  location = var.location
+  resource_group_name = var.resource_group_name
+  sku_name = var.sku_name
   identity {
     type = "SystemAssigned"
   }
@@ -20,25 +15,7 @@ resource "azurerm_role_assignment" "aaPermisions" {
   principal_id         = "${azurerm_automation_account.aa.identity[0].principal_id}"
 }
 
-resource "azurerm_storage_account" "storage" {
-  resource_group_name = "${var.resource_group_name}"
-  account_replication_type = "LRS"
-  account_tier = "Standard"
-  location = "${var.location}"
-  name = "sa${var.project_name}${random_string.random_suffix.result}"
-}
 
-resource "azurerm_storage_container" "tfstate" {
-  name                  = "sc${var.project_name}-${random_string.random_suffix.result}"
-  storage_account_name  = azurerm_storage_account.storage.name
-  container_access_type = "blob"
-}
-
-resource "azurerm_role_assignment" "storagePermission" {
-  scope                = azurerm_storage_account.storage.id
-  role_definition_name = "Contributor"
-  principal_id         = "${azurerm_automation_account.aa.identity[0].principal_id}"
-}
 
 resource "azurerm_monitor_diagnostic_setting" "aa_monitor_settings" {
     count = var.enable_diagnostic_settings ? 1:0
